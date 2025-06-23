@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+console.log(process.env.MONGO_URI);
 
 const connectDB = async () => {
   try {
@@ -8,8 +9,9 @@ const connectDB = async () => {
     });
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.log(`Error: ${error.message}`);
+    console.error(`Error: ${error.message}`);
     process.exit(1);
   }
 };
+
 export default connectDB;
