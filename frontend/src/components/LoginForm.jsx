@@ -2,10 +2,11 @@ import { loginUser } from "../api/user.api";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/slice/authSlice.js";
 import { useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 
 const LoginForm = ({ state }) => {
-  const [email, setEmail] = useState("sarkaranurag104@gmail.com");
-  const [password, setPassword] = useState("password123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
