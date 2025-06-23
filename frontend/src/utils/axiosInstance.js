@@ -46,16 +46,13 @@ axiosInstance.interceptors.response.use(
       console.error("Error:", error.message);
     }
 
-    // You can customize the error object before rejecting
     return Promise.reject({
-      // isAxiosError: true,
       message:
         error.response?.data?.message ||
         error.message ||
         "Unknown error occurred",
       status: error.response?.status,
       data: error.response?.data,
-      // originalError: error
     });
   }
 );

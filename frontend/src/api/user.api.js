@@ -18,13 +18,26 @@ export const registerUser = async (name, password, email) => {
 };
 
 export const logoutUser = async () => {
-  const { data } = await axiosInstance.get("/api/auth/logout");
-  return data;
+  try {
+    const { data } = await axiosInstance.post("/api/auth/logout");
+    return data;
+  } catch (error) {
+    console.error("Logout API error:", error);
+    throw error;
+  }
 };
 
 export const getCurrentUser = async () => {
-  const { data } = await axiosInstance.get("/api/auth/me");
-  return data;
+  try {
+    const { data } = await axiosInstance.get("/api/auth/me");
+    return data;
+  } catch (error) {
+    // Only log if it's not a 401 error
+    if (error.status !== 401) {
+      console.log("Get current user failed:", error);
+    }
+    throw error;
+  }
 };
 
 export const getAllUserUrls = async () => {
