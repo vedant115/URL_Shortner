@@ -1,7 +1,9 @@
 import express from "express";
-import { createShortUrl } from "../controller/short_url.controller.js";
+import { getAllUserUrls } from "../controller/user.controller.js";
+import { authMiddleware } from "../middleware/auth.middleware.js";
+
 const router = express.Router();
 
-router.post("/", createShortUrl);
+router.post("/urls", authMiddleware, getAllUserUrls);
 
 export default router;
