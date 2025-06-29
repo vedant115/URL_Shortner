@@ -24,7 +24,19 @@ export const login_user = wrapAsync(async (req, res) => {
 });
 
 export const logout_user = wrapAsync(async (req, res) => {
-  res.clearCookie("accessToken");
+  // Clear the cookie by setting it to expire immediately with same settings
+  res.cookie("accessToken", "", {
+    ...cookieOptions,
+    expires: new Date(0),
+    maxAge: 0,
+  });
+
+  console.log("Clearing cookie with options:", {
+    ...cookieOptions,
+    expires: new Date(0),
+    maxAge: 0,
+  });
+
   res.status(200).json({ message: "logout success" });
 });
 

@@ -12,7 +12,12 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await logoutUser();
+      console.log("Starting logout process");
+
+      // Call the logout API
+      const response = await logoutUser();
+      console.log("Logout API response:", response);
+
       // Clear any cached queries related to authentication
       queryClient.invalidateQueries({ queryKey: ["currentUser"] });
       queryClient.removeQueries({ queryKey: ["currentUser"] });
@@ -20,8 +25,14 @@ const Navbar = () => {
       // Update Redux state
       dispatch(logout());
 
+      // Add a small delay to ensure cookies are cleared
+      // await new Promise(resolve => setTimeout(resolve, 300));
+
+      console.log("Cookies after logout:", document.cookie);
+
       // Navigate to home page
       navigate({ to: "/", replace: true });
+      console.log("Navigated to home page");
     } catch (error) {
       console.error("Logout failed:", error);
     }
