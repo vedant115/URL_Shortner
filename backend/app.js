@@ -30,6 +30,10 @@ app.use(cookieParser());
 
 app.use(attachUser);
 
+app.get("/", (req, res) => {
+  res.send("URL Shortener API is running");
+});
+
 app.use("/api/user", user_routes);
 app.use("/api/auth", auth_routes);
 app.use("/api/create", short_url);
