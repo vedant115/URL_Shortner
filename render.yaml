@@ -2,6 +2,7 @@ services:
   - type: web
     name: url-shortener-api
     runtime: node
+    plan: free
     buildCommand: cd backend && npm install
     startCommand: cd backend && node app.js
     envVars:
@@ -12,6 +13,16 @@ services:
       - key: JWT_SECRET
         sync: false
       - key: APP_URL
-        sync: false
+        value: https://url-shortener-api.onrender.com
       - key: FRONTEND_URL
-        sync: false
+        value: https://url-shortener-frontend.onrender.com
+
+  - type: web
+    name: url-shortener-frontend
+    runtime: node
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm install -g serve && serve -s dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://url-shortener-api.onrender.com
