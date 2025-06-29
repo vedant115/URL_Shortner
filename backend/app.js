@@ -15,6 +15,10 @@ dotenv.config("./.env");
 
 const app = express();
 
+// Log environment variables for debugging
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
+
 app.use(
   cors({
     origin: process.env.FRONTEND_URL || "http://localhost:5173",

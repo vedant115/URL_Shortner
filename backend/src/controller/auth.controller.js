@@ -14,7 +14,12 @@ export const login_user = wrapAsync(async (req, res) => {
   const { email, password } = req.body;
   const { token, user } = await loginUser(email, password);
 
+  // Set cookie with proper options
   res.cookie("accessToken", token, cookieOptions);
+
+  // Log cookie being set (for debugging)
+  console.log("Setting cookie with options:", cookieOptions);
+
   res.status(200).json({ user, message: "login success" });
 });
 

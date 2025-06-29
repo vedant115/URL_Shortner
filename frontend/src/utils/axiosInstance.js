@@ -1,10 +1,13 @@
 import axios from "axios";
 import { API_URL } from "../api/config.js";
 
+// Log the API URL for debugging
+console.log("API URL:", API_URL);
+
 const axiosInstance = axios.create({
   baseURL: API_URL,
   timeout: 10000, //10s
-  withCredentials: true,
+  withCredentials: true, // This is crucial for cross-domain cookies
 });
 
 // Response interceptor
